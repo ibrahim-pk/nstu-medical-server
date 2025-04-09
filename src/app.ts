@@ -13,10 +13,29 @@ const app: Application = express();
 
 //app.use(cors({ origin:["https://medicalcenter.nstu.edu.bd",'http://localhost:3000'], credentials: true }));
 
+// const corsOptions = {
+//   origin: ["https://medicalcenter.nstu.edu.bd","http://medicalcenter.nstu.edu.bd","http://localhost:3000"],
+//   credentials: true,
+// };
+
 const corsOptions = {
-  origin: ["https://medicalcenter.nstu.edu.bd","http://medicalcenter.nstu.edu.bd","http://localhost:3000"],
+  origin: function (origin:any, callback:any) {
+    const allowedOrigins = [
+      "https://medicalcenter.nstu.edu.bd",
+      "http://medicalcenter.nstu.edu.bd",
+      "http://localhost:3000",
+    ];
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true,
 };
+
+
+
 
 app.use(cors(corsOptions));
 
