@@ -1,16 +1,14 @@
 import jwt, { JwtPayload, Secret } from 'jsonwebtoken';
 
-const createToken = (
+export const createToken = (
   payload: Record<string, unknown>,
-  secret: Secret,
-  expireTime: string
 ): string => {
-  return jwt.sign(payload, secret, {
-    expiresIn: expireTime,
+  return jwt.sign(payload, process.env.JWT_SECRET as Secret, {
+    expiresIn:"365d",
   });
 };
 
-const createResetToken = (
+export const createResetToken = (
   payload: any,
   secret: Secret,
   expireTime: string
@@ -21,13 +19,9 @@ const createResetToken = (
   });
 };
 
-const verifyToken = (token: string, secret: Secret): JwtPayload => {
+export const verifyToken = (token: string, secret: Secret): JwtPayload => {
   return jwt.verify(token, secret) as JwtPayload;
 };
 
 
-export const jwtHelpers = {
-  createToken,
-  verifyToken,
-  createResetToken
-};
+

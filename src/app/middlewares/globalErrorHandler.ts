@@ -2,7 +2,6 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
-import config from '../../config';
 import ApiError from '../../errors/ApiError';
 import handleValidationError from '../../errors/handleValidationError';
 
@@ -11,14 +10,15 @@ import handleCastError from '../../errors/handleCastError';
 import handleZodError from '../../errors/handleZodError';
 import { IGenericErrorMessage } from '../../interfaces/error';
 import { errorlogger } from '../../shared/logger';
-
+import dotenv from 'dotenv'
+dotenv.config()
 const globalErrorHandler: ErrorRequestHandler = (
   error,
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  config.env === 'development'
+  process.env.NODE_ENV === 'development'
     ? console.log(`🐱‍🏍 globalErrorHandler ~~`, { error })
     : errorlogger.error(`🐱‍🏍 globalErrorHandler ~~`, error);
 
@@ -68,7 +68,7 @@ const globalErrorHandler: ErrorRequestHandler = (
     success: false,
     message,
     errorMessages,
-    stack: config.env !== 'production' ? error?.stack : undefined,
+    stack: process.env.NODE_ENV !== 'production' ? error?.stack : undefined,
   });
 };
 

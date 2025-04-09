@@ -1,0 +1,30 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "F:\\NSTUMEDICAL\\server\\logs\\winston\\errors\\.0a2560dd3b30b6d7cadc745b4ceb770f944c21ad-audit.json",
+    "files": [
+        {
+            "date": 1744167346689,
+            "name": "F:\\NSTUMEDICAL\\server\\logs\\winston\\errors\\phu-2025-09-04-08-error.log",
+            "hash": "a29d9be8f4390817b0bc218a525c657b8ce095b70cb0c6946489ae3a9a7c2f27"
+        },
+        {
+            "date": 1744167660800,
+            "name": "F:\\NSTUMEDICAL\\server\\logs\\winston\\errors\\phu-2025-09-04-09-error.log",
+            "hash": "c2f85bc8f1b64138499982d76aec1e3f659fa28c9627dc741fd58ee3d6089321"
+        },
+        {
+            "date": 1744172023187,
+            "name": "F:\\NSTUMEDICAL\\server\\logs\\winston\\errors\\phu-2025-09-04-10-error.log",
+            "hash": "8fa2fdda184071780222e90fd62c76e9199eff929519fdfee0c14e6ef67315f4"
+        },
+        {
+            "date": 1744174947873,
+            "name": "F:\\NSTUMEDICAL\\server\\logs\\winston\\errors\\phu-2025-09-04-11-error.log",
+            "hash": "e5a501b25c7e449bcbc7e887e1786ba0574cb252d6d14d527325d668badf65ca"
+        }
+    ],
+    "hashType": "sha256"
+}

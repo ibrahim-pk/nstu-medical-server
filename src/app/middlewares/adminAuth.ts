@@ -7,13 +7,13 @@ import { verifyToken } from "../../helpers/jwtHelpers";
 
 dotenv.config();
 
-const auth =
+const adminAuth =
   (...requiredRoles: string[]) =>
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       
       const authHeader = req.headers.authorization;
-      //console.log(authHeader)
+      console.log(authHeader)
       if (!authHeader || !authHeader.startsWith("Bearer ")) {
         throw new ApiError(httpStatus.UNAUTHORIZED, "You are not authorized");
       }
@@ -27,7 +27,7 @@ const auth =
         throw new ApiError(httpStatus.UNAUTHORIZED, "Invalid token");
       }
      
-      if (!(verifiedUser.email)) {
+      if (!(verifiedUser.role==='admin')) {
         throw new ApiError(httpStatus.UNAUTHORIZED, "Invalid User");
       }
       
@@ -44,4 +44,4 @@ const auth =
     }
   };
 
-export default auth;
+export default adminAuth;

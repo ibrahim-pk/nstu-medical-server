@@ -2,22 +2,48 @@ import cors from 'cors';
 import express, { Application, NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
-import routes from './app/routes';
-
 import cookieParser from 'cookie-parser';
+import medicineROuter from './app/modules/medicine/medicalRouter';
+import doctorRouter from './app/modules/doctors/doctorRouter';
+import appointmentRouder from './app/modules/appointment/appRouter';
+import userRouter from './app/modules/users/userRouter';
+import dashboardRouter from './app/modules/dashboard/dashboardRouter';
 
 const app: Application = express();
 
-app.use(cors({ origin: 'http://localhost:3030', credentials: true }));
+app.use(cors({ origin:'http://localhost:3000', credentials: true }));
+
+
 app.use(cookieParser());
 
 //parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// app.use('/api/v1/users/', UserRoutes);
-// app.use('/api/v1/academic-semesters', AcademicSemesterRoutes);
-app.use('/api/v1', routes);
+
+
+//api
+ app.use('/api/v1/medicine', medicineROuter);
+ app.use('/api/v1/doctors', doctorRouter);
+ app.use('/api/v1/appointment', appointmentRouder);
+ app.use('/api/v1/user', userRouter);
+ app.use("/api/v1/dashboard", dashboardRouter);
+
+
+
+app.get('/', async (req: Request, res: Response, next: NextFunction) => {
+   res.status(200).send("server is running ")
+})
+
+
+
+
+
+
+
+
+
+
 
 //Testing
 // app.get('/', async (req: Request, res: Response, next: NextFunction) => {
