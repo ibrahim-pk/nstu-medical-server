@@ -13,33 +13,13 @@ const app: Application = express();
 
 //app.use(cors({ origin:["https://medicalcenter.nstu.edu.bd",'http://localhost:3000'], credentials: true }));
 
-// const corsOptions = {
-//   origin: ["https://medicalcenter.nstu.edu.bd","http://medicalcenter.nstu.edu.bd","http://localhost:3000"],
-//   credentials: true,
-// };
+const corsOptions = {
+  origin: ["https://medicalcenter.nstu.edu.bd","http://medicalcenter.nstu.edu.bd","http://localhost:3000"],
+  credentials: true,
+};
 
-app.use((req, res, next) => {
-  const allowedOrigins = [
-    'https://medicalcenter.nstu.edu.bd',
-    'http://medicalcenter.nstu.edu.bd',
-    'http://localhost:3000',
-  ];
-  const origin = req.headers.origin as string;
+app.use(cors(corsOptions));
 
-  if (allowedOrigins.includes(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-  }
-
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-Type,Accept,Authorization');
-
-  if (req.method === 'OPTIONS') {
-    return res.sendStatus(200);
-  }
-
-  next();
-});
 
 
 app.use(cookieParser());
