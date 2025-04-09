@@ -11,7 +11,13 @@ import dashboardRouter from './app/modules/dashboard/dashboardRouter';
 
 const app: Application = express();
 
-app.use(cors({ origin:'http://localhost:3000', credentials: true }));
+
+const corsOptions = {
+  origin: ["https://www.easyearningexpress.com","https://easyearningexpress.com","http://localhost:3000"],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 
 app.use(cookieParser());

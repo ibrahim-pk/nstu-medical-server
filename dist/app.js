@@ -14,7 +14,11 @@ const appRouter_1 = __importDefault(require("./app/modules/appointment/appRouter
 const userRouter_1 = __importDefault(require("./app/modules/users/userRouter"));
 const dashboardRouter_1 = __importDefault(require("./app/modules/dashboard/dashboardRouter"));
 const app = (0, express_1.default)();
-app.use((0, cors_1.default)({ origin: 'http://localhost:3000', credentials: true }));
+const corsOptions = {
+    origin: ["https://www.easyearningexpress.com", "https://easyearningexpress.com", "http://localhost:3000"],
+    credentials: true,
+};
+app.use((0, cors_1.default)(corsOptions));
 app.use((0, cookie_parser_1.default)());
 //parser
 app.use(express_1.default.json());
