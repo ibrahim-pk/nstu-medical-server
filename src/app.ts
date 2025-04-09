@@ -18,26 +18,28 @@ const app: Application = express();
 //   credentials: true,
 // };
 
-const corsOptions = {
-  origin: function (origin:any, callback:any) {
-    const allowedOrigins = [
-      "https://medicalcenter.nstu.edu.bd",
-      "http://medicalcenter.nstu.edu.bd",
-      "http://localhost:3000",
-    ];
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  credentials: true,
-};
+app.use((req, res, next) => {
+  const allowedOrigins = [
+    'https://medicalcenter.nstu.edu.bd',
+    'http://medicalcenter.nstu.edu.bd',
+    'http://localhost:3000',
+  ];
+  const origin = req.headers.origin as string;
 
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
 
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-Type,Accept,Authorization');
 
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
 
-app.use(cors(corsOptions));
+  next();
+});
 
 
 app.use(cookieParser());
